@@ -1,0 +1,15 @@
+:root {
+    --color-primary: #2563eb;
+    --color-secondary: #1e293b;
+    --color-bg: #f8fafc;
+    --color-text: #0f172a;
+    --radius: 0.75rem;
+}
+
+body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+}
