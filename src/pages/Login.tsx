@@ -2,15 +2,37 @@ import React, { useState } from "react";
 import InputField from "../components/InputField";
 import Button from "../components/Button"
 import logo from "../assets/react.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login: React.FC = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [correo, setCorreo] = useState("");
+  const [contrasena, setContrasena] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Login con:", { email, password });
+    setError("");
+    
+    try {
+      const response = await fetch("http://localhost:8080/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ correo, contrasena }),
+      });
+
+      if (!response.ok){
+        throw new Error("Credenciales inválidos")
+      }
+
+      const data = await response.json();
+
+      localStorage.setItem("token", data.token);
+
+      navigate("/")
+    } catch (err: any) {
+      setError(err.message || "Error en el servidor");
+    }
   };
 
   return (
@@ -26,17 +48,19 @@ const Login: React.FC = () => {
           <InputField
             label="Correo electrónico"
             type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={correo}
+            onChange={(e) => setCorreo(e.target.value)}
             placeholder="ejemplo@correo.com"
           />
           <InputField
             label="Contraseña"
             type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={contrasena}
+            onChange={(e) => setContrasena(e.target.value)}
             placeholder="••••••••"
           />
+
+          {error && <p className="text-red-600 text-sm mb-3">{error}</p>}
 
           <Button text="Iniciar sesión" type="submit" />
 
