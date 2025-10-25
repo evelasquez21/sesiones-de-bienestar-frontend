@@ -4,10 +4,9 @@ const Home = () => {
     return(
         <>
         <Navbar/>
-        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-slate-100">
-            <div className="bg-white shadow-lg rounded-2xl p-8 w-full max-w-md">
-                <h1>Desde home</h1>
-            </div>
+        <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-blue-50 to-slate-100">
+            <h1 className="text-8xl font-medium text-blue-300">Sesiones de bienestar</h1>
+            <p className="text-2xl text-gray-600">Encuentra tu servico y reserva tu cita</p>
         </div>
         </>
     )

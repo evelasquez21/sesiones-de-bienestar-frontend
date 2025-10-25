@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import logo from "../assets/react.svg";
+import logo from "../assets/Designer.png";
 import { Link } from "react-router-dom";
 
 const Navbar: React.FC = () => {
@@ -20,15 +20,9 @@ const Navbar: React.FC = () => {
                 {/* Links - versión escritorio */}
                 <div className="hidden md:flex space-x-8 text-slate-700 font-medium">
                 <Link to="/" className="hover:text-blue-600 transition">Inicio</Link>
-                <a href="#" className="hover:text-blue-600 transition">
-                    Servicios
-                </a>
-                <a href="#" className="hover:text-blue-600 transition">
-                    Nosotros
-                </a>
-                <a href="#" className="hover:text-blue-600 transition">
-                    Contacto
-                </a>
+                <Link to="/servicios" className="hover:text-blue-600 transition">Servicios</Link>
+                <Link to="/nosotros" className="hover:text-blue-600 transition">Nosotros</Link>
+                <Link to="/contacto" className="hover:text-blue-600 transition">Contacto</Link>
                 </div>
 
                 {/* Botón */}
@@ -50,18 +44,10 @@ const Navbar: React.FC = () => {
             {menuOpen && (
             <div className="md:hidden bg-white shadow-lg border-t border-slate-100">
                 <div className="flex flex-col space-y-3 px-6 py-4 text-slate-700 font-medium">
-                    <a href="#" className="hover:text-blue-600 transition">
-                    Inicio
-                    </a>
-                    <a href="#" className="hover:text-blue-600 transition">
-                    Servicios
-                    </a>
-                    <a href="#" className="hover:text-blue-600 transition">
-                    Nosotros
-                    </a>
-                    <a href="#" className="hover:text-blue-600 transition">
-                    Contacto
-                    </a>
+                    <Link to="/" className="hover:text-blue-600 transition">Inicio</Link>
+                    <Link to="/servicios" className="hover:text-blue-600 transition">Servicios</Link>
+                    <Link to="/nosotros" className="hover:text-blue-600 transition">Nosotros</Link>
+                    <Link to="/contacto" className="hover:text-blue-600 transition">Contacto</Link>
                     <Link to="login" className="bg-blue-200 border-1 border-blue-300 text-blue-900 text-center rounded-lg py-2 px-4 hover:transition-all hover:duration-350 hover:bg-blue-50 hover:text-blue-500 hover:border-blue-500 active:transition-all active:bg-blue-100 active:text-blue-500 active:border-blue-500">Iniciar sesión</Link>
                 </div>
             </div>

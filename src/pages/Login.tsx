@@ -1,37 +1,26 @@
 import React, { useState } from "react";
 import InputField from "../components/InputField";
 import Button from "../components/Button"
-import logo from "../assets/react.svg";
-import { Link, useNavigate } from "react-router-dom";
+import logo from "../assets/Designer.png"
+import { Link } from "react-router-dom";
+import { useAuth } from "../hooks/UseAuth";
 
 const Login: React.FC = () => {
+  const { login } = useAuth();
   const [correo, setCorreo] = useState("");
   const [contrasena, setContrasena] = useState("");
   const [error, setError] = useState("");
-  const navigate = useNavigate();
+  const [status, setStatus] = useState<boolean | null>(null);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
     
     try {
-      const response = await fetch("http://localhost:8080/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ correo, contrasena }),
-      });
-
-      if (!response.ok){
-        throw new Error("Credenciales inválidos")
-      }
-
-      const data = await response.json();
-
-      localStorage.setItem("token", data.token);
-
-      navigate("/")
+      await login(correo, contrasena);
     } catch (err: any) {
-      setError(err.message || "Error en el servidor");
+      setError(err.message || "Credenciales incorrectas o error del servidor");
+      setStatus(false);
     }
   };
 
@@ -51,6 +40,7 @@ const Login: React.FC = () => {
             value={correo}
             onChange={(e) => setCorreo(e.target.value)}
             placeholder="ejemplo@correo.com"
+            status={status}
           />
           <InputField
             label="Contraseña"
@@ -58,6 +48,7 @@ const Login: React.FC = () => {
             value={contrasena}
             onChange={(e) => setContrasena(e.target.value)}
             placeholder="••••••••"
+            status={status}
           />
 
           {error && <p className="text-red-600 text-sm mb-3">{error}</p>}

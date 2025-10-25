@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import InputField from "../components/InputField";
 import Button from "../components/Button"
-import logo from "../assets/react.svg";
+import logo from "../assets/Designer.png";
 import { Link, useNavigate } from "react-router-dom";
 import { format, parseISO } from "date-fns"
 
